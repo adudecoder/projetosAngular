@@ -34,7 +34,9 @@
             <td>
                 <app-star [rating]="course.rating"></app-star>
             </td>
-            <td></td>
+            <td>
+                <a [routerLink]="['/courses/info', course.id]" class="btn btn-primary">Edit Info</a> <!-- course.id é um Path variable, atributo de link -->
+            </td>
         </tr>
     </tbody>
 

@@ -11,6 +11,7 @@ import { CourseComponent } from './courses/courses.component';
 import { StarComponent } from './star/star.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Error404Component } from './error404/error404.component';
+import { InfoCourseComponent } from './courses/info-course/info-course.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { Error404Component } from './error404/error404.component';
     StarComponent,
     ReplacePipe,
     NavbarComponent,
-    Error404Component
+    Error404Component,
+    InfoCourseComponent
   ],
   imports: [
     BrowserModule,
@@ -28,10 +30,13 @@ import { Error404Component } from './error404/error404.component';
     FontAwesomeModule,
     RouterModule.forRoot([ // espera um array de objetos do tipo rotas
       {
-        path: '', redirectTo: 'courses', pathMatch: 'full' // Rota que corresponde a raiz da aplicação
+        path: 'courses', component: CourseComponent // Rota de redirecionamento
       },
       {
-        path: 'courses', component: CourseComponent // Rota de redirecionamento
+        path: 'courses/info/:id', component: InfoCourseComponent // Rota de informações dos cursos
+      }, // Informando o Angular que essa rota recebe um id
+      {
+        path: '', redirectTo: 'courses', pathMatch: 'full' // Rota que corresponde a raiz da aplicação
       },
       {
         path: '**', component: Error404Component // Rota caso ele não encontre as rotas iniciais
