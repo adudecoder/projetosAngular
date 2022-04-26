@@ -16,12 +16,18 @@ export class InfoCourseComponent implements OnInit {
 
   ngOnInit(): void {
     // Por padrão essa função retorna string, colocando o sinal de + convertemos para number
-    this.course = this.courseService.retriveById(+this.activatedRoute.snapshot.paramMap.get('id'));
+    this.courseService.retriveById(+this.activatedRoute.snapshot.paramMap.get('id')).subscribe({
+      next: course => this.course = course,
+      error: err => console.log('Error', err)
+    });
     // Tirando uma fotografia da rota
   }
 
   save(): void {
-    this.courseService.save(this.course);
+    this.courseService.save(this.course).subscribe({
+      next: course => console.log('Saved with success', course),
+      error: err => console.log('Error', err)
+    });
   }
 
 }

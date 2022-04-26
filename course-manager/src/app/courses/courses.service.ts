@@ -9,21 +9,32 @@ import { Observable } from 'rxjs';
 })
 export class CourseService { 
 
-  retrieveAll(): Course[] {
-    return COURSES;
+  private coursesUrl: string = 'http://localhost:3100/api/courses';
+
+  constructor(private httpClient: HttpClient) {}
+
+  retrieveAll(): Observable<Course[]> {
+    return this.httpClient.get<Course[]>(this.coursesUrl);
   }
 
-  retriveById(id: number): Course {
-    return COURSES.find((courseIterator: Course) => courseIterator.id === id);
+  retriveById(id: number): Observable<Course> {
+    return this.httpClient.get<Course>(`${this.coursesUrl}/${id}`);
   }
 
-  save(course: Course): void {
+  save(course: Course): Observable<Course> {
 
     if (course.id) {
-        const INDEX = COURSES.findIndex((courseIterator: Course) => courseIterator.id === course.id);
-        COURSES[INDEX] = course;
+      if (course.id) {
+        return this.httpClient.put<Course>(`${this.coursesUrl}/${course.id}`, course);
+      } else {
+        return this.httpClient.post<Course>(`${this.coursesUrl}`, course);
+      }
     }
 
+  }
+
+  deleteById(id: number): Observable<any> {
+    return this.httpClient.delete<any>(`${this.coursesUrl}/${id}`);
   }
 
 }
