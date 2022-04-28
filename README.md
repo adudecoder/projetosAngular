@@ -2,6 +2,24 @@
 
 Repositório para projetos praticos do curso de Angular e explicações sobre as funções do Angular.
 
+# Introdução aos conceitos sobre **Diretivas**
+* As **diretivas** são marcadores em um elemento **DOM** (como um atributo) que informam ao **Angular** para anexar um comportamento especificado a um elemento existente.
+
+* As **diretivas** existem desde o **AngularJS**, na nova versão são usadas com **componentes**, principalmente para criar **tags personalizadas** em uma aplicação **Angular**. Existem muitas diretivas prontas que podemos usar e também podemos criar nossas próprias diretivas.
+1. Exemplo
+![Exemplo de Component](img-exemplo-markdown/diretivas.png)
+Algumas diretivas podem mudar completamente a estrutura da saída do template do **componente**. Essas diretivas podem alterar o **layout do DOM** adicionando e removendo **elementos DOM de visualização**. Podemos classificar essas diretivas em **estruturais**:
+* NgIf
+* NgFor
+* NgSwitch, NgSwitchWhen, NgSwitchDefault
+
+Outras diretivas podem simplesmente alterar a aparência dos itens gerados pelo modelo. Vamos chamar essas diretivas não estruturais :
+
+* NgClass
+* NgStyle
+* NgControlName
+* NgModel
+
 # Introdução aos conceitos sobre **Components**
 
 ## O que são **Components** ?
@@ -87,3 +105,25 @@ No exemplo 2 vemos o inverso, o **Component Filho** devolvendo dinheiro para o *
 * _Angular Element_, entra na parte de **Web Components**, padrão para definir novos elementos **HTML**, novos **components** como os que criamos no Angular só que de forma nativa e aguinostica de qualquer **FrameWork**, então conseguimos criar um **Angular Element** utilizando o angular e empacotar esse projeto com o **Angular Element** e conseguimos chamar ele em qualquer página só usando o seletor dele.
 2. Exemplo.
 ![Exemplo de Service](img-exemplo-markdown/alert.png)
+
+# Metodologias específicas para organização do Front-End
+
+## Arquitetura modular **SMCSS**
+* Organização dos arquivos de estilo(**CSS ou Sass/Scss**). Metodologia opcional dependendo do projeto.
+1. Exemplo.
+![Exemplo de Service](img-exemplo-markdown/smac.png)
+
+## Block, element, modifier (**BEM**) CSS
+* Nomeclaturas de nomes para estruturar o **HTML**.
+1. Exemplo.
+![Exemplo de Service](img-exemplo-markdown/bem.png)
+
+## **CSS** orientado à objeto (**OOCSS**).
+* Muito adotado por **FrameWorks de CSS**.
+1. Exemplo.
+![Exemplo de Service](img-exemplo-markdown/csspdo.png)
+
+# Exercício
+* Joga no seu repositório e me marca no seu **GitHub**.
+1. Exemplo. 
+![Exemplo de Service](img-exemplo-markdown/exercicio.png)
