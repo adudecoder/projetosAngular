@@ -2,6 +2,8 @@
 
 Repositório para projetos praticos do curso de Angular e explicações sobre as funções do Angular.
 
+# Introdução aos conceitos sobre **Components**
+
 ## O que são **Components** ?
 * _Components_ são **DIV's Containers** onde seram criados partes da aplicação como por exemplo, **HEADER**, **NAVBAR**, **Slider Cards** entre outros
 1. Exemplo
@@ -58,3 +60,30 @@ No exemplo acima, vamos imaginar que o **Component Pai** precisa dar dinheiro pa
 No exemplo 2 vemos o inverso, o **Component Filho** devolvendo dinheiro para o **Component Pai**. Para isso utilizamos o **@Output()** e o **EventEmitter**, que é a maneira de como o **Component Filho** compitilha dados com o **Component Pai**.
 * Criamos o **@Output()** no **Component Filho** que é o dinheiro que o **Component Filho** quer devolver para o **Component Pai**, para isso utilizamos o **EventEmitter** que serve para criarmos nossos próprios eventos, da mesma forma que podemos escutar um **Click** podemos escutar o evento **remainingMoney** atribuindo um valor do evento a uma função passando o evento que o **Component Filho** esta mandando ``` <app-pai [remainingMoney]="receiveMoney($event)"></app-pai> ```. e chamamos o método retornando o dinheiro de uma compra do **Component Filho** ao **Component Pai**
 **OBS:** ``` this.remainingMoney.EventEmitter().(change); ```
+
+# Gestão de complexidade no **Front-End**
+
+## Os **Components apresentacionais** e os **Components inteligentes**
+* Chamado de **Dumb-Component**, **Component puro** ou **Components apresentacionais**, qual a finalidade desses **métodos** ?, apenas mostrar a **Interface** ao usuário final ou seja, ficam responsavéis pela parte visual. As vezes temos logicas de negócio dentro de um **Component**, então para minimizar isso trabalhamos com esse padrão de **Components inteligentes** e **Components apresentacionais**, e eles não devem causar um efeito colateral na aplicação
+1. Exemplo.
+![Exemplo de Service](img-exemplo-markdown/apresentacionais.png)
+* Os **Components inteligentes** são parecidos com **funções impuras** que acabam causando algum efeito colateral na aplicação e não sabemos o resultado que ela irá produzir, são funções um pouco mais complexas. Um **Components inteligentes** vai ser vários **Components apresentacionais** onde a lógica vai ficar toda nesse **Components inteligentes** e os **Components apresentacionais** só servem para enviar dados que você precisa que eles apresentem. O **Component inteligente** é aonde vão estar as dependências externas. **Components apresentacionais** a gente nõ instancia nenhum tipo de **Service**, não delegamos nada, apenas usamos o @Input para mandar algo e o @Output para imitir ele para algum **Component inteligente** fazer esa lógica.
+2. Exemplo.
+![Exemplo de Service](img-exemplo-markdown/iteligentes.png)
+
+* Component smart(**Component inteligente**) funcionando, no **Component pai** temos um lista, alguns serviços sendo chamados, e no NgOnInit() ele vai popular essa lista com esses dados do ```todoService```, e apartir disso ele vai enviar essa lista para o **Component apresentacional**(_Dumb-Component_) ```<app-todos-list [list]="list | async"></app-todos-list>```, e utilizando **Component apresentacional** mantemos nossa organização do código e a manutenção.
+3. Exemplo.
+![Exemplo de Service](img-exemplo-markdown/exemplo3componenet.png)
+
+## O que é **Design Modular** ?
+* Como dito no exemplo abaixo, divisão da aplicação em módulos, que ajuda na organização do projeto dependendo do tamanho dele, e das funcionalidades que ele tem como um todo. Geralmente trabalhamos com 3 tipos de módulos, sendo eles:
+* _Core Module_, onde colocamos tudo aquilo que precisa ter em uma única instância na aplicação inteira, serviços de terceiros, dando como exemplo o **HTTP Client**, que intercepita uma chamada e conseguimos aplicar uma lógica ou até mesmo adicionar um load para o usuário. Se tiver mais de um módulochamando o **HTTP Client**, o interceptor pode se confundir, porque ele vai estar atuando como instância e a outra instância não vai ser atingida pelo interceptor. Ou seja, existendindo mais de uma chamado no módulo **HTTP Client** teremos um erro.
+* _Shared Module_, onde vamos adicionar todos os nossos **components**, **diretivas**, **pipes** até mesmo **services** que utilizamos com frequenia em outros módulos da comunicação, como exemplo podemos colocar o **CommonsModule** no **Shared Module** e importar só no módulo que acabamos de criar e já vamos poder utilizar esses **components**, **pipes** que a gente criou para ser reutilizado entre a aplicação
+* _Feature Module_, quando a gente tem uma funcionalidade muito grande em uma aplicação, é interessante que criemos um módulo para aquela funcionalidade especifica e vai tornar a aplicação mais organizada
+1. Exemplo.
+![Exemplo de Service](img-exemplo-markdown/designmodular.png)
+* Para lidar com projetos de arquitetura, que precisamos criar definições para varias projetos, é importante usamos o **Library** e o **Angular element**, são um tipo de projeto que o Angular também gerar além do SPA comum.
+* _Library_, é como se fosse um módulo que pode ser reutilizado em várias aplicações diferentes, não fica apenas no scopo do projeto local, ele é tipo o **Materials Library**, onde conseguimos instalar ela pelo NPM e utilizar seus components e diretivas.
+* _Angular Element_, entra na parte de **Web Components**, padrão para definir novos elementos **HTML**, novos **components** como os que criamos no Angular só que de forma nativa e aguinostica de qualquer **FrameWork**, então conseguimos criar um **Angular Element** utilizando o angular e empacotar esse projeto com o **Angular Element** e conseguimos chamar ele em qualquer página só usando o seletor dele.
+2. Exemplo.
+![Exemplo de Service](img-exemplo-markdown/alert.png)
